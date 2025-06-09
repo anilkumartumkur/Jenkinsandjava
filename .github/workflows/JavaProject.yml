@@ -18,6 +18,8 @@ jobs:
       run: sudo apt install maven -y
     - name: Create the binary file
       run: mvn package
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
     - name: aws installation
       run: |
           set -e
