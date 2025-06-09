@@ -39,6 +39,7 @@ jobs:
     - name: login to registry
       run: |
        sudo apt install docker.io -y
+       sudo groupadd docker
        sudo usermod -aG ubuntu docker
        aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/j8p4c8m8
     - name: Create the docker image
