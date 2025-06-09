@@ -2,7 +2,7 @@ name: JavaHelloWorld
 on: 
  push: 
   branches:
-   - master
+   - main
 jobs: 
  build: 
   runs-on: self-hosted
