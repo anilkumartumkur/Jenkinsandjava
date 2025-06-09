@@ -28,4 +28,19 @@ jobs:
           unzip -q awscliv2.zip
           sudo ./aws/install --update
           aws --version
-     
+    - name: AWS configure
+      run: |
+       echo "Setting up AWS credentials for Jenkins..."
+       mkdir -p ~/.aws
+       echo "[default]" > ~/.awscredentials
+       echo "aws_access_key_id=${{ secrets.DOCKER_ID }}>> ~/.awscredentials
+       echo "aws_secret_access_key=${{ secrets.DOCKER_TOEKN }}" >> ~/.aws/credentials
+    - name: login to registry
+      run: aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/j8p4c8m8
+    - name: Create the docker image
+      uses: docker/build-push-action@v5
+      with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: githubaction:latest public.ecr.aws/j8p4c8m8/githubaction:latest
