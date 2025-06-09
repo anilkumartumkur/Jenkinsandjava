@@ -12,9 +12,12 @@ jobs:
     - name: Set up Java and Maven
       uses: actions/setup-java@v4
       with:
-        distribution: 'temurin'
-        java-version: '17'
-        cache: 'maven'
+          distribution: 'temurin'      
+          java-version: '17'          
+          cache: 'maven'              
+
+    - name: Verify Maven is installed
+      run: mvn -v                   
 
     - name: Resolve Maven dependencies
       run: mvn dependency:resolve
