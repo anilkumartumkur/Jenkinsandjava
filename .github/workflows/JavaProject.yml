@@ -14,7 +14,14 @@ jobs:
       with:
           distribution: 'temurin'      
           java-version: '17'          
-          cache: 'maven'              
+          cache: 'maven'
+    - name: Cache Maven dependencies
+      uses: actions/cache@v4
+      with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven     
 
     - name: Verify Maven is installed
       run: mvn -v                   
