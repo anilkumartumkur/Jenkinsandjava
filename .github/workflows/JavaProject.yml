@@ -17,4 +17,4 @@ jobs:
     - name: Install Maven
       run: sudo apt install maven -y
     - name: Create the binary file
-      run: mvn -B package --file pom.xml 
+      run: mvn package
