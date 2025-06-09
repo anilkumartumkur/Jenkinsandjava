@@ -32,8 +32,8 @@ jobs:
       run: |
        echo "Setting up AWS credentials for Jenkins..."
        mkdir -p ~/.aws
-       echo "[default]" > ~/.awscredentials
-       echo "aws_access_key_id=${{ secrets.DOCKER_ID }}>> ~/.awscredentials
+       echo "[default]" > ~/.aws/credentials
+       echo "aws_access_key_id=${{ secrets.DOCKER_ID }}>> ~/.aws/credentials
        echo "aws_secret_access_key=${{ secrets.DOCKER_TOEKN }}" >> ~/.aws/credentials
     - name: login to registry
       run: aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/j8p4c8m8
