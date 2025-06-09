@@ -14,6 +14,7 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
-        cache: maven
+    - name: Install Maven
+      run: sudo apt install maven -y
     - name: Create the binary file
       run: mvn -B package --file pom.xml 
