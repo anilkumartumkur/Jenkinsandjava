@@ -18,30 +18,15 @@ jobs:
       run: sudo apt install maven -y
     - name: Create the binary file
       run: mvn package
-    
-    - name: aws installation
-      run: |
-          set -e
-          echo "Installing AWS CLI..."
-          sudo apt update && sudo apt install -y unzip curl
-          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-          rm -rf aws
-          unzip -q awscliv2.zip
-          sudo ./aws/install --update
-          aws --version
-    - name: AWS configure
-      run: |
-       echo "Setting up AWS credentials for Jenkins..."
-       mkdir -p ~/.aws
-       echo "[default]" > ~/.aws/credentials
-       echo "aws_access_key_id=${{ secrets.DOCKER_ID }}" >> ~/.aws/credentials
-       echo "aws_secret_access_key=${{ secrets.DOCKER_TOEKN }}" >> ~/.aws/credentials
-    - name: login to registry
-      run: |
-       sudo apt install docker.io -y
-       sudo usermod -aG docker ubuntu
-       sudo aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/j8p4c8m8
-    - name: Create the docker image
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+          aws-access-key-id: ${{ secrets.DOCKER_ID }}
+          aws-secret-access-key: ${{ secrets.DOCKER_TOEKN }}
+          aws-region: us-east-1 
+    - name: Login to Amazon ECR
+      uses: aws-actions/amazon-ecr-login@v2    
+    - name: Docker push and build    
       uses: docker/build-push-action@v5
       with:
           context: .
