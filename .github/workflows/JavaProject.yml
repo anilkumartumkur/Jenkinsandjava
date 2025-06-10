@@ -32,4 +32,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: githubaction:latest public.ecr.aws/j8p4c8m8/githubaction:latest
+          tags: public.ecr.aws/j8p4c8m8/samplejava/samplejava:latest
