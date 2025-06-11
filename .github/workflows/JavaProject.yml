@@ -1,6 +1,6 @@
 name: JavaHelloWorld
 on:    
- push: 
+ push:  
   branches:
    - main
 jobs: 
