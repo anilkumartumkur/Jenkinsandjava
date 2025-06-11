@@ -23,7 +23,7 @@ jobs:
       with:
           aws-access-key-id: ${{ secrets.DOCKER_ID }}
           aws-secret-access-key: ${{ secrets.DOCKER_TOEKN }}
-          aws-region: us-east-1 
+          aws-region: apr-south-1 
     - name: Login to Amazon ECR
       uses: aws-actions/amazon-ecr-login@v2    
     - name: Docker push and build    
