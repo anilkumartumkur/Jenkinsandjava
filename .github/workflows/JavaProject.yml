@@ -15,7 +15,7 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
     - name: Install Maven
-      run: sudo apt install maven -y && sudo apt install docker.io
+      run: sudo apt install maven -y 
     - name: Create the binary file
       run: mvn package
     - name: Configure AWS credentials
