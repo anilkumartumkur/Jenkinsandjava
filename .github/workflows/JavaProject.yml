@@ -26,10 +26,9 @@ jobs:
           aws-region: ap-south-1 
     - name: Login to Amazon ECR
       uses: aws-actions/amazon-ecr-login@v2    
-    - name: Docker push and build    
+    - name: Build and push Docker image
       uses: docker/build-push-action@v5
       with:
-          context: .
-          file: ./Dockerfile
-          push: true
-          tags: public.ecr.aws/j8p4c8m8/githubaction:latest
+        context: .
+        push: true
+        tags: public.ecr.aws/j8p4c8m8/githubaction:latest
