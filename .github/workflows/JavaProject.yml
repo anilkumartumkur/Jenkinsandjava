@@ -1,4 +1,4 @@
-name: JavaHelloWorld
+name: JavaHelloWorld 
 on:    
  push:    
   branches:
